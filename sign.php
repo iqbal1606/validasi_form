@@ -16,9 +16,17 @@ if(isset($_POST['submit'])){
 	$date = $_POST['date'];
 	$cek_user = mysqli_query($conn, "SELECT * FROM user WHERE email_user='$email_user'");
 	$row      = mysqli_num_rows($cek_user);
+    $secret_key = "6LdwWjIiAAAAAHgLPgGJg7TvlvtlMkRrC2MpNqgu";
+    $verify = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key.'&response='.$_POST['g-recaptcha-response']);
+    $response = json_decode($verify);
+    if($response->success){ // Jika proses validasi captcha berhasil
+        echo "<script ipt type='text/javascript'>alert('anda_human'); </script>";
+    }else{ // Jika captcha tidak valid
+        echo "<script type='text/javascript'>alert('Chapta Tidak Valid Cheklist Saya Bukan Robot'); 
+        window.location='sign.php'; </script>";
+    }
 	if($row > 0 ){
-		echo "<script type='text/javascript'>alert('Register Gagal Email Anda Buat Telah Terpakai'); 
-  		window.location='sign.php'; </script>";
+		echo "<script type='text/javascript'>alert('Register Gagal Email Anda Buat Telah Terpakai'); </script>";
 		
 	}else{
 		array_push($err);
@@ -60,7 +68,7 @@ if(isset($_POST['submit'])){
 		<h1>Silahkan Regristasi</h1></h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form method="post" autocomplete="on" action="validasi_recaptha.php">
+				<form method="post" autocomplete="off" action="">
 					<input type="hidden" name="tgl_login" value="<?=date ('Y-m-d H:i')?>">
 					<input class="text email" id="email_user" type="email" name="email_user" placeholder="Email"  required="">
 					<input class="text" id="name_user" type="text" name="nama_user" placeholder="Masukan Nama Anda"  required="" minlength="4" maxlength="50">
@@ -98,6 +106,7 @@ if(isset($_POST['submit'])){
 					<input class="text" type="text" id="alamat" name="alamat" placeholder="Silahkan isi alamat jalan, Gedung, No.rumah" required="">
 					<input class="text email" type="password" id="password_user" name="password_user" placeholder="Password" required="">
                     <div class="g-recaptcha" data-sitekey="6LdwWjIiAAAAAFSYFU1HFDYcb1cmQ9pvTE9SRTq0"></div>
+                    <br>
                     <input type="submit" name="submit" value="submit" onclick="kirim()">
 				</form>
 				
