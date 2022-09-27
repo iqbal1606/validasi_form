@@ -11,6 +11,6 @@ if($response->success){ // Jika proses validasi captcha berhasil
 		window.location='login.php'; </script>";
 }else{ // Jika captcha tidak valid
     echo "<script type='text/javascript'>alert('Chapta Tidak Valid Cheklist Saya Bukan Robot'); 
-    window.location='register.php'; </script>";
+    window.location='sign.php'; </script>";
 }
 ?>

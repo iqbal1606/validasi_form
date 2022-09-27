@@ -98,7 +98,6 @@ if(isset($_POST['submit'])){
 					<input class="text" type="text" id="alamat" name="alamat" placeholder="Silahkan isi alamat jalan, Gedung, No.rumah" required="">
 					<input class="text email" type="password" id="password_user" name="password_user" placeholder="Password" required="">
                     <div class="g-recaptcha" data-sitekey="6LdwWjIiAAAAAFSYFU1HFDYcb1cmQ9pvTE9SRTq0"></div>
-                    <br>
                     <input type="submit" name="submit" value="submit" onclick="kirim()">
 				</form>
 				
